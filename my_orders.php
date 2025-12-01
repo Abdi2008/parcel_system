@@ -46,6 +46,10 @@ $result = $conn->query($sql);
         .badge-transit { background-color: #cce5ff; color: #004085; }
         .badge-delivered { background-color: #d4edda; color: #155724; }
         .badge-cancelled { background-color: #f8d7da; color: #721c24; }
+        .main-content h2{
+            color: #637c96ff;
+            background-color: aquamarine;
+        }
     </style>
 </head>
 <body>
