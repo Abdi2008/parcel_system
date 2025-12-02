@@ -25,9 +25,11 @@ if (isset($_POST['login_btn'])) {
 
             // 4. Redirect based on role (Admin vs Customer)
             if ($row['role'] == 'admin') {
-                header("Location: admin_dashboard.php"); // We will build this later
+                header("Location: admin_dashboard.php"); // It will take to admin dashboard
+            } elseif ($row['role'] == 'driver') {
+                header("Location: driver_dashboard.php"); // It will take to driver dashboard
             } else {
-                header("Location: dashboard.php");
+                header("Location: dashboard.php"); // It will take to customer dashboard
             }
             exit();
 

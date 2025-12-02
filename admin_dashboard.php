@@ -75,7 +75,7 @@ $result = $conn->query($sql);
         <div class="logo">Admin Panel</div>
         <div class="menu">
             <a href="#" class="active"><i class="fas fa-chart-line"></i> Overview</a>
-            <a href="#"><i class="fas fa-boxes"></i> All Shipments</a>
+            <a href="admin_shipments.php"><i class="fas fa-boxes"></i> All Shipments</a>
             <a href="#"><i class="fas fa-users"></i> Users</a>
             <a href="logout.php" style="margin-top: auto; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
