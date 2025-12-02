@@ -10,14 +10,15 @@
         
         /* Navbar */
         .navbar { display: flex; justify-content: space-between; padding: 20px 50px; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 24px; font-weight: bold; color: #2c3e50; }
+        .logo { font-size: 24pt; font-weight: bold; color: #2c3e50; }
         .nav-links a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 600; }
         .btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9; }
         
         /* Hero Section */
-        .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/1600x900/?delivery,logistics'); background-size: cover; color: white; }
-        .hero h1 { font-size: 50px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; margin-bottom: 30px; }
+        .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url("images/freights.jpg"); background-size: cover; color: white; }
+        .hero h1 { font-size: 50px; margin-bottom: 20px; color: black;}
+        .logo-img { width: 50px; height: 50px; }
+        .hero p { font-size: 20px; margin-bottom: 30px; color: black; }
         .cta-btn { padding: 15px 30px; background: #27ae60; color: white; text-decoration: none; font-size: 18px; border-radius: 5px; font-weight: bold; }
         
         /* Services */
@@ -29,6 +30,7 @@
 <body>
 
     <nav class="navbar">
+        <img src="images/bat-silhouette-black-shape-with-wings-forming-a-circle.png" alt="" class="logo-img">
         <div class="logo">IPMS Logistics</div>
         <div class="nav-links">
             <a href="login.php">Login</a>

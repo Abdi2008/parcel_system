@@ -70,6 +70,7 @@ while($d = $driver_res->fetch_assoc()) {
         <div class="menu">
             <a href="admin_dashboard.php">Overview</a>
             <a href="admin_dashboard.php" class="active">All Shipments</a>
+            <a href="admin_users.php"><i class="fas fa-users"></i> Users</a>
             <a href="logout.php" style="color:#e74c3c;">Logout</a>
         </div>
     </div>

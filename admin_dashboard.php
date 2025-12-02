@@ -20,9 +20,19 @@ $active_res = $conn->query($active_query);
 $active_deliveries = $active_res->fetch_assoc()['total'];
 
 // Calculate Total Revenue
-$rev_query = "SELECT SUM(total_price) as total FROM bookings";
+// Calculate Total Revenue (Excluding Cancelled Orders)
+$rev_query = "SELECT SUM(total_price) as total FROM bookings WHERE status != 'cancelled'";
 $rev_res = $conn->query($rev_query);
-$total_revenue = $rev_res->fetch_assoc()['total'];
+$raw_revenue = $rev_res->fetch_assoc()['total'];
+
+// If there are no bookings, revenue is 0 (to avoid errors)
+if (!$raw_revenue) { $raw_revenue = 0; }
+
+// Calculate Profit (Driver gets 20%, Company keeps 80%)
+$driver_cut = 0.20; 
+$company_cut = 0.80;
+
+$net_profit = $raw_revenue * $company_cut;
 
 // 3. Fetch All Bookings (Joined with Users table to get customer names)
 $sql = "SELECT bookings.*, users.full_name 
@@ -76,7 +86,7 @@ $result = $conn->query($sql);
         <div class="menu">
             <a href="#" class="active"><i class="fas fa-chart-line"></i> Overview</a>
             <a href="admin_shipments.php"><i class="fas fa-boxes"></i> All Shipments</a>
-            <a href="#"><i class="fas fa-users"></i> Users</a>
+            <a href="admin_users.php"><i class="fas fa-users"></i> Users</a>
             <a href="logout.php" style="margin-top: auto; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </div>
@@ -102,10 +112,10 @@ $result = $conn->query($sql);
             </div>
             <div class="stat-card">
                 <div>
-                    <h3>KES <?php echo number_format($total_revenue); ?></h3>
-                    <p>Total Revenue</p>
+                    <h3>KES <?php echo number_format($net_profit); ?></h3>
+                    <p>Net Profit</p>
                 </div>
-                <i class="fas fa-wallet" style="color: #2ecc71;"></i>
+                <small style="color:#999; font-size:12px;">(Total Sales: KES <?php echo number_format($raw_revenue); ?>)</small>
             </div>
         </div>
 
