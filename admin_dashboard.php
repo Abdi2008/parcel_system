@@ -1,10 +1,35 @@
 <?php
 session_start();
-// 1. Security Check: Is the user logged in? AND Is the user an Admin?
+include 'db_connect.php';
+
+// 1. Security Check: Admin Only
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php"); // Kick them out if they are not an admin
+    header("Location: index.php");
     exit();
 }
+
+// 2. Fetch Stats
+// Count Total Users
+$user_query = "SELECT COUNT(*) as total FROM users WHERE role='customer'";
+$user_res = $conn->query($user_query);
+$total_users = $user_res->fetch_assoc()['total'];
+
+// Count Active Deliveries (Pending or In Transit)
+$active_query = "SELECT COUNT(*) as total FROM bookings WHERE status IN ('pending', 'in_transit')";
+$active_res = $conn->query($active_query);
+$active_deliveries = $active_res->fetch_assoc()['total'];
+
+// Calculate Total Revenue
+$rev_query = "SELECT SUM(total_price) as total FROM bookings";
+$rev_res = $conn->query($rev_query);
+$total_revenue = $rev_res->fetch_assoc()['total'];
+
+// 3. Fetch All Bookings (Joined with Users table to get customer names)
+$sql = "SELECT bookings.*, users.full_name 
+        FROM bookings 
+        JOIN users ON bookings.user_id = users.user_id 
+        ORDER BY created_at DESC";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -13,10 +38,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     <meta charset="UTF-8">
     <title>Admin Panel - IPMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">   
-    <!-- /* Font Awesome for icons */ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Reusing your nice dashboard styles */
+        /* Keeping your existing styles */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { display: flex; height: 100vh; background-color: #f0f2f5; }
         
@@ -38,13 +62,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
         th { background-color: #f8f9fa; font-weight: 600; color: #2c3e50; }
-        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .pending { background: #ffeaa7; color: #d35400; }
-        .delivered { background: #55efc4; color: #00b894; }
-        .main-content h2{
-            color: #637c96ff;
-            font-size: 23pt
-        }
+        
+        /* Action Form Styles */
+        .status-select { padding: 5px; border-radius: 4px; border: 1px solid #ddd; }
+        .btn-update { padding: 5px 10px; background: #2980b9; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-update:hover { background: #3498db; }
     </style>
 </head>
 <body>
@@ -66,21 +88,21 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         <div class="card-grid">
             <div class="stat-card">
                 <div>
-                    <h3>1</h3>
-                    <p>Total Users</p>
+                    <h3><?php echo $total_users; ?></h3>
+                    <p>Total Customers</p>
                 </div>
                 <i class="fas fa-users" style="color: #3498db;"></i>
             </div>
             <div class="stat-card">
                 <div>
-                    <h3>0</h3>
+                    <h3><?php echo $active_deliveries; ?></h3>
                     <p>Active Deliveries</p>
                 </div>
                 <i class="fas fa-truck" style="color: #e67e22;"></i>
             </div>
             <div class="stat-card">
                 <div>
-                    <h3>$0</h3>
+                    <h3>KES <?php echo number_format($total_revenue); ?></h3>
                     <p>Total Revenue</p>
                 </div>
                 <i class="fas fa-wallet" style="color: #2ecc71;"></i>
@@ -92,21 +114,42 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         <table>
             <thead>
                 <tr>
-                    <th>Booking ID</th>
+                    <th>ID</th>
                     <th>Customer</th>
                     <th>Route</th>
-                    <th>Status</th>
+                    <th>Current Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>#1001</td>
-                    <td>Abdirahman</td>
-                    <td>Nairobi -> Mombasa</td>
-                    <td><span class="status-badge pending">Pending</span></td>
-                    <td><button>View</button></td>
-                </tr>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td>#<?php echo $row['booking_id']; ?></td>
+                        <td>
+                            <strong><?php echo $row['full_name']; ?></strong><br>
+                            <small>Tier: <?php echo ucfirst($row['service_tier']); ?></small>
+                        </td>
+                        <td>
+                            <?php echo $row['pickup_address']; ?> ➝ <br>
+                            <?php echo $row['dropoff_address']; ?>
+                        </td>
+                        <td style="font-weight:bold; color: #555;">
+                            <?php echo strtoupper(str_replace('_', ' ', $row['status'])); ?>
+                        </td>
+                        <td>
+                            <form action="update_status.php" method="POST" style="display:flex; gap:5px;">
+                                <input type="hidden" name="booking_id" value="<?php echo $row['booking_id']; ?>">
+                                <select name="status" class="status-select">
+                                    <option value="pending" <?php if($row['status']=='pending') echo 'selected'; ?>>Pending</option>
+                                    <option value="in_transit" <?php if($row['status']=='in_transit') echo 'selected'; ?>>In Transit</option>
+                                    <option value="delivered" <?php if($row['status']=='delivered') echo 'selected'; ?>>Delivered</option>
+                                    <option value="cancelled" <?php if($row['status']=='cancelled') echo 'selected'; ?>>Cancelled</option>
+                                </select>
+                                <button type="submit" name="update_btn" class="btn-update">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

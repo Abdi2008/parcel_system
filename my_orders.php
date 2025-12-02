@@ -58,6 +58,7 @@ $result = $conn->query($sql);
         <div class="logo"><i class="fas fa-box-open"></i> IPMS</div>
         <div class="menu">
             <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="profile.php"><i class="fas fa-user"></i> Profile</a>
             <a href="book_parcel.php"><i class="fas fa-shipping-fast"></i> Book Parcel</a>
             <a href="#" class="active"><i class="fas fa-list"></i> My Orders</a>
             <a href="logout.php" style="margin-top: auto; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Logout</a>

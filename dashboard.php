@@ -2,7 +2,7 @@
 session_start();
 // Security Check: If user is NOT logged in, kick them back to login page
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -26,6 +26,7 @@ if (!isset($_SESSION['user_id'])) {
             <span>Welcome, <?php echo $_SESSION['full_name']; ?></span>
             <div>
                 <a href="book_parcel.php">Book Parcel</a>
+                <a href="profile.php"><i class="fas fa-user"></i> Profile</a>
                 <a href="my_orders.php">My Orders</a>
                 <a href="logout.php">Logout</a>
             </div>
