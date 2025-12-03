@@ -13,6 +13,7 @@
         .logo { font-size: 24pt; font-weight: bold; color: #E67E22; }
         .nav-links a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 600; }
         .btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9; }
+        .btn-1:hover{ padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9;}
         
         /* Hero Section */
         .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url("images/freights.jpg"); background-size: cover; color: white; }
@@ -25,7 +26,7 @@
         .features { display: flex; padding: 50px; justify-content: space-around; background-color: rgb(117, 117, 91); }
         .feature-box { text-align: center; max-width: 300px; }
         .feature-box h3 { margin: 15px 0; color: #EBD5AB; font-size: 20pt; }
-         .feature-box p {color: black; font-size: ;}
+        .feature-box p {color: black; font-size: ;}
     </style>
 </head>
 <body>
@@ -34,7 +35,7 @@
         <img src="images/bat-silhouette-black-shape-with-wings-forming-a-circle.png" alt="" class="logo-img">
         <div class="logo">IPMS Logistics</div>
         <div class="nav-links">
-            <a href="login.php">Login</a>
+            <a href="login.php" class="btn-1">Login</a>
             <a href="register.php" class="btn">Sign Up</a>
         </div>
     </nav>
