@@ -6,11 +6,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: white; color: #333; }
+        body { background: beige; color: #E67E22; }
         
         /* Navbar */
         .navbar { display: flex; justify-content: space-between; padding: 20px 50px; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 24pt; font-weight: bold; color: #2c3e50; }
+        .logo { font-size: 24pt; font-weight: bold; color: #E67E22; }
         .nav-links a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 600; }
         .btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9; }
         
@@ -22,9 +22,10 @@
         .cta-btn { padding: 15px 30px; background: #27ae60; color: white; text-decoration: none; font-size: 18px; border-radius: 5px; font-weight: bold; }
         
         /* Services */
-        .features { display: flex; padding: 50px; justify-content: space-around; background: #f9f9f9; }
+        .features { display: flex; padding: 50px; justify-content: space-around; background-color: rgb(117, 117, 91); }
         .feature-box { text-align: center; max-width: 300px; }
-        .feature-box h3 { margin: 15px 0; color: #2c3e50; }
+        .feature-box h3 { margin: 15px 0; color: #EBD5AB; font-size: 20pt; }
+         .feature-box p {color: black; font-size: ;}
     </style>
 </head>
 <body>

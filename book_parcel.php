@@ -44,7 +44,7 @@ if (isset($_POST['book_btn'])) {
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Specific styles for the booking form */
-        body { background: #f0f2f5; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        body { background: beige; height: 100vh; display: flex; justify-content: center; align-items: center; }
         .booking-container { background: white; padding: 40px; border-radius: 10px; width: 100%; max-width: 500px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         h2 { text-align: center; margin-bottom: 20px; color: #2c3e50; }
         label { font-weight: 600; font-size: 14px; display: block; margin-top: 15px; color: #34495e; }
@@ -58,7 +58,7 @@ if (isset($_POST['book_btn'])) {
 <body>
 
     <div class="booking-container">
-        <h2>📦 New Shipment</h2>
+        <h2> New Shipment</h2>
         <form method="POST">
             
             <label>Pickup Address (Point A)</label>
@@ -72,15 +72,15 @@ if (isset($_POST['book_btn'])) {
                     <label>Parcel Type</label>
                     <select name="parcel_type">
                         <option value="standard">Standard</option>
-                        <option value="perishable">🍎 Perishable</option>
-                        <option value="fragile">💎 Fragile</option>
+                        <option value="perishable"> Perishable</option>
+                        <option value="fragile"> Fragile</option>
                     </select>
                 </div>
                 <div style="flex: 1;">
                     <label>Service Tier</label>
                     <select name="service_tier" id="service_tier" onchange="calculateTotal()">
                         <option value="standard">Standard (Slow)</option>
-                        <option value="deluxe">🚀 Deluxe (Fast)</option>
+                        <option value="deluxe"> Deluxe (Fast)</option>
                     </select>
                 </div>
             </div>

@@ -42,10 +42,10 @@ $recent_res = $conn->query($recent_sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { display: flex; height: 100vh; background-color: #f4f6f9; }
+        body { display: flex; height: 100vh; background-color: beige; }
         
         /* Sidebar */
-        .sidebar { width: 250px; background-color: #2c3e50; color: white; display: flex; flex-direction: column; padding: 20px; }
+        .sidebar { width: 250px; background-color: rgb(117, 117, 91); color: white; display: flex; flex-direction: column; padding: 20px; }
         .logo { font-size: 24px; font-weight: bold; margin-bottom: 40px; color: #ecf0f1; }
         .menu a { text-decoration: none; color: #bdc3c7; display: block; padding: 15px; margin-bottom: 10px; border-radius: 8px; transition: 0.3s; }
         .menu a:hover, .menu a.active { background-color: #34495e; color: white; padding-left: 20px; }

@@ -76,7 +76,7 @@ while($d = $driver_res->fetch_assoc()) {
     </div>
 
     <div class="main-content">
-        <h2>🚚 Manage Shipments & Drivers</h2>
+        <h2> Manage Shipments & Drivers</h2>
         <br>
         <table>
             <thead>
