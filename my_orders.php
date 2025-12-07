@@ -95,7 +95,13 @@ $result = $conn->query($sql);
                                     <?php echo ucfirst($row['parcel_type']); ?><br>
                                     <small><?php echo ($row['service_tier'] == 'deluxe') ? '🚀 Deluxe' : 'Standard'; ?></small>
                                 </td>
-                                <td>KES <?php echo number_format($row['total_price']); ?></td>
+                                <td>
+                                    <div style="font-weight:bold;">KES <?php echo number_format($row['total_price']); ?></div>
+                                    <a href="receipt.php?id=<?php echo $row['booking_id']; ?>" 
+                                    style="font-size: 12px; color: #3498db; text-decoration: none;">
+                                    <i class="fas fa-receipt"></i> View Breakdown
+                                    </a>
+                                </td>
                                 <td>
                                     <?php 
                                         $status = $row['status'];
