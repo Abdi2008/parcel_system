@@ -52,7 +52,7 @@ $result = $conn->query($sql);
     <style>
         /* Keeping your existing styles */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { display: flex; height: 100vh; background-color: #f0f2f5; }
+        body { display: flex; height: 100vh; background-color: #18407cff; }
         
         .sidebar { width: 250px; background-color: #2c3e50; color: white; display: flex; flex-direction: column; padding: 20px; }
         .logo { font-size: 24px; font-weight: bold; margin-bottom: 40px; }
