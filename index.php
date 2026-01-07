@@ -14,6 +14,7 @@
         .nav-links a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 600; }
         .btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9; }
         .btn-1:hover{ padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white; background: #2980b9;}
+        .receba{ border: 2px solid rgb(117, 117, 91); border-radius: 50px; padding: 5px;}
         
         /* Hero Section */
         .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url("images/freights.jpg"); background-size: cover; color: white; }
@@ -33,7 +34,8 @@
 
     <nav class="navbar">
         <img src="images/bat-silhouette-black-shape-with-wings-forming-a-circle.png" alt="" class="logo-img">
-        <div class="logo">IPMS Logistics</div>
+        <div class="receba">
+        <div class="logo siuu">IPMS Logistics</div></div>
         <div class="nav-links">
             <a href="login.php" class="btn-1">Login</a>
             <a href="register.php" class="btn">Sign Up</a>
