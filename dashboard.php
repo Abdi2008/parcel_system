@@ -114,7 +114,7 @@ $recent_res = $conn->query($recent_sql);
             <a href="book_parcel.php"><i class="fas fa-shipping-fast"></i> Book Parcel</a>
             <a href="my_orders.php"><i class="fas fa-list"></i> My Orders</a>
             <a href="profile.php"><i class="fas fa-user"></i> Profile</a>
-            <a href="logout.php" style="margin-top: auto; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="logout.php" style="margin-top: auto; color: #a03a2fff;"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </div>
 
